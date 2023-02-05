@@ -24,9 +24,9 @@ class GroceryStoreForm(FlaskForm):
         ])
     submit = SubmitField('Submit')
 
-    def validate_title(form, field):
-        if 'banana' in field.data:
-            raise ValidationError('Title cannot contain the word banana')
+    # def validate_title(form, field):
+    #     if 'banana' in field.data:
+    #         raise ValidationError('Title cannot contain the word banana')
 
 
 class GroceryItemForm(FlaskForm):
@@ -45,12 +45,8 @@ class GroceryItemForm(FlaskForm):
             DataRequired(), 
             Length(min=3, max=80, message="Your title needs to be betweeen 3 and 80 chars")
         ])
-    price = FloatField('Price',
-        validators=[
-            DataRequired(),
-            Length(min=3, max=80, message="Price needs to be betweeen 3 and 80 chars")
-        ])
-    category = SelectField('Category', choices=ItemCategory.choices())
-    photo_url = StringField('Photo')
-    store = QuerySelectField('Store', query_factory=lambda: GroceryStore.query, allow_blank=False)
+    price = FloatField('Price', validators=[DataRequired()])
+    category = SelectField('Category', choices=ItemCategory.choices(), validators=[DataRequired()])
+    photo_url = StringField('Photo', validators=[DataRequired()])
+    store = QuerySelectField('Store', query_factory=lambda: GroceryStore.query, validators=[DataRequired()])
     submit = SubmitField('Submit')
