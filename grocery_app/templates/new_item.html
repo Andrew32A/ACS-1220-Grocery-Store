@@ -7,27 +7,50 @@
     <fieldset>
         <legend>Please enter your information:</legend>
 
-
-
         <!-- TODO: Remove the next paragraph and use the `form` object passed in 
             from the route to render a form. -->
-            
+
             {{ form.csrf_token }}
 
             {{ form.name.label }}
             {{ form.name }}
+            {% for error in form.name.errors %}
+                <ul>
+                    <li class="error">{{ error }}</li>
+                </ul>
+            {% endfor %}
 
             {{ form.price.label }}
             {{ form.price }}
+            {% for error in form.price.errors %}
+                <ul>
+                    <li class="error">{{ error }}</li>
+                </ul>
+            {% endfor %}
 
             {{ form.category.label }}
             {{ form.category }}
+            {% for error in form.category.errors %}
+                <ul>
+                    <li class="error">{{ error }}</li>
+                </ul>
+            {% endfor %}
 
             {{ form.photo_url.label }}
             {{ form.photo_url }}
+            {% for error in form.photo_url.errors %}
+                <ul>
+                    <li class="error">{{ error }}</li>
+                </ul>
+            {% endfor %}
 
             {{ form.store.label }}
             {{ form.store }}
+            {% for error in form.store.errors %}
+                <ul>
+                    <li class="error">{{ error }}</li>
+                </ul>
+            {% endfor %}
 
         <input type="submit" value="Submit">
     </fieldset>
