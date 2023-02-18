@@ -17,7 +17,6 @@ auth = Blueprint("auth", __name__)
 @main.route('/')
 def homepage():
     all_stores = GroceryStore.query.all()
-    print(all_stores)
     return render_template('home.html', all_stores=all_stores)
 
 @main.route('/new_store', methods=['GET', 'POST'])
@@ -81,7 +80,7 @@ def item_detail(item_id):
     form = GroceryItemForm(obj=item)
     
     if form.validate_on_submit():
-        item.name=form.name.data
+        item.name=form.name.data,
         item.price=form.price.data,
         item.category=form.category.data,
         item.photo_url=form.photo_url.data,
@@ -120,12 +119,11 @@ def signup():
         )
         db.session.add(user)
         db.session.commit()
-        flash('Account Created.')
-        print('created')
+        flash('Account Created')
         return redirect(url_for('auth.login'))
     print(form.errors)
-    return render_template('signup.html', form=form)
 
+    return render_template('signup.html', form=form)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -135,6 +133,7 @@ def login():
         login_user(user, remember=True)
         next_page = request.args.get('next')
         return redirect(next_page if next_page else url_for('main.homepage'))
+
     return render_template('login.html', form=form)
 
 @auth.route('/logout')
