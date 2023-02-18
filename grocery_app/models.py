@@ -49,4 +49,4 @@ class User(UserMixin, db.Model):
 shopping_list_table = db.Table('user_shopping_list',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('item_id', db.Integer, db.ForeignKey('grocery_item.id'))
-    )
+)

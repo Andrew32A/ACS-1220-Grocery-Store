@@ -7,8 +7,8 @@ from flask_login import login_user, logout_user, current_user, login_required
 from flask_bcrypt import Bcrypt
 
 main = Blueprint("main", __name__)
-bcrypt = Bcrypt(app)
 auth = Blueprint("auth", __name__)
+bcrypt = Bcrypt(app)
 
 #################################
 #           Routes              #
@@ -109,7 +109,6 @@ def shopping_list():
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
-    print('in signup')
     form = SignUpForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
